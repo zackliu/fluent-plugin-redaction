@@ -11,7 +11,7 @@ module Fluent
                 config_param :key, :string, default: nil
                 config_param :value, :string, default: nil
                 config_param :pattern, :regexp, default: nil
-                config_param :replacement, :string, default: "[REDACTED]"
+                config_param :replace, :string, default: "[REDACTED]"
             end
 
             def initialize
@@ -42,7 +42,7 @@ module Fluent
                     if @pattern_rules_map.key?(c.key)
                         list = @pattern_rules_map[c.key]
                     end
-                    list << [c.value, c.pattern, c.replacement]
+                    list << [c.value, c.pattern, c.replace]
                     @pattern_rules_map[c.key] = list
                 end
             end
