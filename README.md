@@ -13,6 +13,8 @@
 
 ## Overview
 
+Redaction filter plugin that is used to redact/anonymize data in specific record fields.
+
 ## Installation
 
 Install from RubyGems:
@@ -21,6 +23,44 @@ $ gem install fluent-plugin-redaction
 ```
 
 ## Configuration
+
+```
+  <filter **>
+    @type redaction
+    <rule>
+      key message
+      value myemail@mail.com
+      replace ****@mail.com
+    </rule>
+    <rule>
+      key message
+      value mycardnumber
+    </rule>
+    <rule>
+      key message
+      pattern /my_regex_pattern/
+      replace [REDACTED]
+    </rule>
+  </filter>
+```
+
+### Configuration options
+
+#### key
+
+Specified field in a record. Replacement will happen against the value of the selected field.
+
+#### value
+
+Specific value that is searched in the value of the selected field. Replace matches with `replace` value.
+
+#### pattern
+
+Regular expression, on matches in the specified record field data will be replaced with the value of `replace` field.
+
+#### replace
+
+The replacement string on value/pattern matches. Default value: `[REDACTED]`
 
 ## Contributing
 
