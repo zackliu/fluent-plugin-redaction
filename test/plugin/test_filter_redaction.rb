@@ -8,6 +8,24 @@ require 'fluent/plugin/filter_redaction'
 class RubyFilterTest < Test::Unit::TestCase
   include Fluent
 
+  CONFIG = %[
+    key message
+    value hell
+    <rule>
+      key message
+      value hell
+    </rule>
+  ]
+
+  PATTERN_CONFIG = %[
+    key message
+    pattern /(hell)/
+    <rule>
+      key message
+      value hell
+    </rule>
+  ]
+
   setup do
     Fluent::Test.setup
   end
@@ -20,10 +38,20 @@ class RubyFilterTest < Test::Unit::TestCase
     d.filtered
   end
 
-  #sub_test_case 'filter' do
-  #  test 'execute to jsonl array' do
-  #      assert_equal(msg[i], e[0])
-  #    end
-  #  end
-  #end
+  sub_test_case 'filter' do
+    test 'Filter hell from hello messages with simple value' do
+      msg = {'message' => 'hello hello'}
+      es  = emit(msg, CONFIG)
+      assert_equal("[REDACTED]o [REDACTED]o", "#{es[0][1]["message"]}")
+    end
+  end
+
+  sub_test_case 'filter' do
+    test 'Filter hell from hello messages with pattern' do
+      msg = {'message' => 'hello hello'}
+      es  = emit(msg, PATTERN_CONFIG)
+      assert_equal("[REDACTED]o [REDACTED]o", "#{es[0][1]["message"]}")
+    end
+  end
+
 end
