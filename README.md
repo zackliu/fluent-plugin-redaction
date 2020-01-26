@@ -1,4 +1,4 @@
-# Fluentd Filter Redaction Plugin
+# Redaction filter plugin for Fluentd
 
 [![Build Status](https://travis-ci.org/oleewere/fluent-plugin-redaction.svg?branch=master)](https://travis-ci.org/oleewere/fluent-plugin-redaction)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
