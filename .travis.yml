@@ -10,5 +10,4 @@ branches:
   only:
     - master
 
-# bundle exec rake test
-script: make gem
+script: bundle exec rake test
