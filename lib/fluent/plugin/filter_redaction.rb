@@ -55,7 +55,7 @@ module Fluent
                             if rule[0]
                                 record_value = record_value.gsub(rule[0], rule[2])
                             else
-                                record_value = record_value.gsub(rule[1], rule[3])
+                                record_value = record_value.gsub(rule[1], rule[2])
                             end
                         end
                         record[key] = record_value
