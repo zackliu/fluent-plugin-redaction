@@ -22,7 +22,7 @@ class RubyFilterTest < Test::Unit::TestCase
     pattern /(hell)/
     <rule>
       key message
-      value hell
+      pattern /(hell)/
     </rule>
   ]
 
