@@ -30,7 +30,7 @@ $ gem install fluent-plugin-redaction
     <rule>
       key message
       value myemail@mail.com
-      replace ****@mail.com
+      replace "****@mail.com"
     </rule>
     <rule>
       key message
@@ -39,7 +39,7 @@ $ gem install fluent-plugin-redaction
     <rule>
       key message
       pattern /my_regex_pattern/
-      replace [REDACTED]
+      replace "[REDACTED]"
     </rule>
   </filter>
 ```
