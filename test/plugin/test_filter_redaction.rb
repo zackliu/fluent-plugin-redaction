@@ -26,6 +26,14 @@ class RubyFilterTest < Test::Unit::TestCase
     </rule>
   ]
 
+    CUSTOMIZED_REDACT_PATTERN_CONFIG = %[
+      <rule>
+        pattern /(?-i)eyJ(?i)[a-z0-9\-_%]+\.(?-i)eyJ(?i)[a-z0-9\-_%]+\.[a-z0-9\-_%]+/
+        key $.properties.userId
+        replace "[REDACTED]"
+      </rule>
+  ]
+
   setup do
     Fluent::Test.setup
   end
@@ -54,4 +62,13 @@ class RubyFilterTest < Test::Unit::TestCase
     end
   end
 
+  sub_test_case 'filter' do
+    test 'Filter JWT token from hello messages with nested key input' do
+      msg = {'properties' => {'userId' => 'Bearer eyJlola1H9jIq.eyJo1Zdmd8sHuz.KahSbdi9'}}
+      es  = emit(msg, CUSTOMIZED_REDACT_PATTERN_CONFIG)
+      assert_equal("Bearer [REDACTED]", "#{es[0][1]["properties"]["userId"]}")
+      assert_not_equal("Bearer [REDACTED]", "#{es[0][1]["$.properties.userId"]}")
+      assert_equal("", "#{es[0][1]["$.properties.userId"]}")
+    end
+  end
 end
