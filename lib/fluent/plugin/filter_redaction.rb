@@ -58,7 +58,7 @@ module Fluent
                                 record_value = record_value.gsub(rule[1], rule[2])
                             end
                         end
-                        record[key] = record_value
+                        @accessors[key].set(record, record_value)
                     end
                 end
                 record
