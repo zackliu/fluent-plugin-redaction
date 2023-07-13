@@ -1,6 +1,6 @@
 # Redaction filter plugin for Fluentd
 
-[![Build Status](https://travis-ci.org/oleewere/fluent-plugin-redaction.svg?branch=master)](https://travis-ci.org/oleewere/fluent-plugin-redaction)
+![Build](https://github.com/oleewere/fluent-plugin-redaction/actions/workflows/build.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Gem Version](https://badge.fury.io/rb/fluent-plugin-redaction.svg)](http://badge.fury.io/rb/fluent-plugin-redaction)
 ![](https://ruby-gem-downloads-badge.herokuapp.com/fluent-plugin-redaction?type=total&metric=true)
