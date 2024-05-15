@@ -1,0 +1,11 @@
+<rule>
+  key $.userId $.header.Referer
+  pattern /access_token=[a-zA-Z0-9\._\-]+/
+  replace access_token=[REDACTED]
+</rule>
+
+<rule>
+  key $.properties.userId
+  pattern /(?-i)eyJ(?i)[a-z0-9\-_%]+\.(?-i)eyJ(?i)[a-z0-9\-_%]+/
+  replace "[REDACTED]"
+</rule>
