@@ -9,37 +9,17 @@ class RubyFilterTest < Test::Unit::TestCase
   include Fluent
 
   CONFIG = %[
-    key message
-    value hell
-    <rule>
-      key message
-      value hell
-    </rule>
+    rule_file rule_file
   ]
 
-  PATTERN_CONFIG = %[
-    key message
-    pattern /(hell)/
-    <rule>
-      key message
-      pattern /(hell)/
-    </rule>
-  ]
-
-    CUSTOMIZED_REDACT_PATTERN_CONFIG = %[
-      <rule>
-        pattern /(?-i)eyJ(?i)[a-z0-9\-_%]+\.(?-i)eyJ(?i)[a-z0-9\-_%]+\.[a-z0-9\-_%]+/
-        key $.properties.userId
-        replace "[REDACTED]"
-      </rule>
-  ]
+  RULE_FILE = "rule_file"
 
   setup do
     Fluent::Test.setup
   end
 
   def emit(msg, conf='')
-    d = Test::Driver::Filter.new(Plugin::RedactionFilter).configure(conf)
+    d = Test::Driver::Filter.new(Plugin::RedactionAltFilter).configure(conf)
     d.run(default_tag: 'test') {
       d.feed(msg)
     }
