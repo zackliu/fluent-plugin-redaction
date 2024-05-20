@@ -1,0 +1,4 @@
+<rule>
+  key message
+  pattern /(hell)/
+</rule>

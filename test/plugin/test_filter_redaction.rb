@@ -8,11 +8,17 @@ require 'fluent/plugin/filter_redaction'
 class RubyFilterTest < Test::Unit::TestCase
   include Fluent
 
-  CONFIG_SINGLE_KEY = %[
-    rule_file rule_file
-  ]
+  def getConfig(rule_file)
+    %[
+      rule_file #{rule_file}
+    ]
+  end
 
-  RULE_FILE = "rule_file"
+  # CONFIG_SINGLE_KEY = %[
+  #   rule_file test_rule_file
+  # ]
+
+  # RULE_FILE = "rule_file"
 
   setup do
     Fluent::Test.setup
@@ -29,7 +35,7 @@ class RubyFilterTest < Test::Unit::TestCase
   sub_test_case 'filter' do
     test 'Filter hell from hello messages with simple value' do
       msg = {'message' => 'hello hello'}
-      es  = emit(msg, CONFIG_SINGLE_KEY)
+      es  = emit(msg, getConfig("test_rule_file"))
       assert_equal("[REDACTED]o [REDACTED]o", "#{es[0][1]["message"]}")
     end
   end
