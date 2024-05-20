@@ -1,6 +1,6 @@
 gem:
 	rm -f fluent-plugin-redaction*.gem
-	gem build fluent-plugin-redaction.gemspec
+	gem build fluent-plugin-redaction-alt.gemspec
 
 install: gem
 	gem install fluent-plugin-redaction*.gem

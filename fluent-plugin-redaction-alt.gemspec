@@ -2,7 +2,7 @@
 $:.push File.expand_path('../lib', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.name = "fluent-plugin-redaction"
+  gem.name = "fluent-plugin-redaction-alt"
   gem.description = "Fluentd redaction filter plugin for anonymize specific strings in text data."
   gem.license = "MIT License"
   gem.homepage = "https://github.com/oleewere/fluent-plugin-redaction"
