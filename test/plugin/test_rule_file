@@ -1,0 +1,20 @@
+<rule>
+  key message
+  pattern /hell/
+</rule>
+
+<rule>
+  key replaceMessage
+  pattern /hell/
+  replace *****
+</rule>
+
+<rule>
+  key multikey1 multikey2
+  pattern /hell/
+</rule>
+
+<rule2>
+  key rule2
+  pattern /hell/
+</rule2>
