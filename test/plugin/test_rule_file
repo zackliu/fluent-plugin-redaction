@@ -18,3 +18,15 @@
   key rule2
   pattern /hell/
 </rule2>
+
+<rule>
+  key $.userId
+  pattern /code=[a-zA-Z0-9\._\-%]+/
+  replace code=[REDACTED]
+</rule>
+
+<rule>
+  key $.properties.userId
+  pattern /access_token=[a-zA-Z0-9\._\-]+/
+  replace access_token=[REDACTED]
+</rule>

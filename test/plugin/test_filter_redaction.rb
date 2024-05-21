@@ -3,7 +3,7 @@ require 'test/unit'
 require 'fluent/log'
 require 'fluent/test'
 require 'fluent/test/driver/filter'
-require 'fluent/plugin/filter_redaction'
+require 'fluent/plugin/filter_redaction_alt'
 
 class RubyFilterTest < Test::Unit::TestCase
   include Fluent
@@ -71,6 +71,18 @@ class RubyFilterTest < Test::Unit::TestCase
       msg = {'rule2' => 'hello hello'}
       es  = emit(msg, getConfig("test/plugin/test_rule_file"))
       assert_equal("hello hello", "#{es[0][1]["rule2"]}")
+    end
+
+    test 'Filter in complex rule 1' do
+      msg = {'userId' => 'code=abcde'}
+      es  = emit(msg, getConfig("test/plugin/test_rule_file"))
+      assert_equal("code=[REDACTED]", "#{es[0][1]["userId"]}")
+    end
+
+    test 'Filter in complex rule 2' do
+      msg = {'properties' => {'userId' => 'access_token=abcde'}}
+      es  = emit(msg, getConfig("test/plugin/test_rule_file"))
+      assert_equal("access_token=[REDACTED]", "#{es[0][1]["properties"]["userId"]}")
     end
   end
 
